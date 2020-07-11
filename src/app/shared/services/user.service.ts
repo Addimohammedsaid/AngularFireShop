@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { User } from "./../models/app-user";
+import { Injectable } from "@angular/core";
+import { AngularFireDatabase } from "@angular/fire/database";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
-
-  constructor() { }
+  constructor(private db: AngularFireDatabase) {}
 }

@@ -1,3 +1,4 @@
+import { ShippingFormComponent } from "./comp/shipping-form/shipping-form.component";
 import { ShippingCartComponent } from "./comp/shipping-cart/shipping-cart.component";
 import { SharedModule } from "./../shared/shared.module";
 import { RouterModule } from "@angular/router";
@@ -40,6 +41,7 @@ import { ProductFilterComponent } from "./comp/product-filter/product-filter.com
     ProductFilterComponent,
     ShippingCartSummaryComponent,
     ShippingCartComponent,
+    ShippingFormComponent,
   ],
 })
 export class ShoppingModule {}
