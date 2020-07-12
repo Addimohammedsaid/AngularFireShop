@@ -1,3 +1,4 @@
+import { AuthGuardService } from "./../shared/services/auth-guard.service";
 import { ShippingFormComponent } from "./comp/shipping-form/shipping-form.component";
 import { ShippingCartComponent } from "./comp/shipping-cart/shipping-cart.component";
 import { SharedModule } from "./../shared/shared.module";
@@ -21,14 +22,17 @@ import { ProductFilterComponent } from "./comp/product-filter/product-filter.com
       {
         path: "check-out",
         component: CheckOutComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: "order-success/:id",
         component: OrderSuccessComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: "my/orders",
         component: MyOrdersComponent,
+        canActivate: [AuthGuardService],
       },
     ]),
   ],

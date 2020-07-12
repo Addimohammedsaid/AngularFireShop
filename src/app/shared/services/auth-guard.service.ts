@@ -1,9 +1,24 @@
-import { Injectable } from '@angular/core';
+import { switchMap, map } from "rxjs/operators";
+import { AuthService } from "./auth.service";
+import { Injectable } from "@angular/core";
+import { Router, CanActivate, RouterStateSnapshot } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class AuthGuardService {
+export class AuthGuardService implements CanActivate {
+  constructor(private _auth: AuthService, private router: Router) {}
 
-  constructor() { }
+  canActivate(route, state: RouterStateSnapshot) {
+    return this._auth.user$.pipe(
+      map((user) => {
+        if (user) return true;
+
+        this.router.navigate(["/login"], {
+          queryParams: { returnUrl: state.url },
+        });
+        return false;
+      })
+    );
+  }
 }

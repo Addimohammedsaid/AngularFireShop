@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 import { ProductFormComponent } from "./comp/product-form/product-form.component";
 import { AdminProductsComponent } from "./comp/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "./comp/admin-orders/admin-orders.component";
+import { AuthGuardService } from "../shared/services/auth-guard.service";
 
 @NgModule({
   imports: [
@@ -20,10 +21,12 @@ import { AdminOrdersComponent } from "./comp/admin-orders/admin-orders.component
       {
         path: "admin/products",
         component: AdminProductsComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: "admin/orders",
         component: AdminOrdersComponent,
+        canActivate: [AuthGuardService],
       },
     ]),
   ],
