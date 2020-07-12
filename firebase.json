@@ -1,10 +1,6 @@
 {
   "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+    "public": "./dist/firebase-shop",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }

@@ -1,6 +1,6 @@
 import { AuthService } from "./../../../shared/services/auth.service";
 import { Component, OnInit } from "@angular/core";
-import { User } from "src/app/shared/models/app-user";
+import { AppUser } from "src/app/shared/models/app-user";
 
 @Component({
   selector: "app-nav-bar",
@@ -8,11 +8,13 @@ import { User } from "src/app/shared/models/app-user";
   styleUrls: ["./nav-bar.component.css"],
 })
 export class NavBarComponent implements OnInit {
-  user: User;
+  appUser: AppUser;
 
   constructor(private _auth: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._auth.appUser$.subscribe((appUser) => (this.appUser = appUser));
+  }
 
   logout() {
     this._auth.logout();

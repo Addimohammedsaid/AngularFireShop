@@ -17,10 +17,10 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Shopping Cart</a>
       </li>
-      <li class="nav-item">
+      <ng-template #anonymUser class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
-      </li>
-      <li class="nav-item dropdown">
+      </ng-template>
+      <li class="nav-item dropdown" *ngIf="appUser; else anonymUser">
         <a
           class="nav-link dropdown-toggle"
           id="navbarDropdown"
@@ -29,7 +29,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Username
+          {{ appUser.name }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a
