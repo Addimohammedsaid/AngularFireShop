@@ -38,18 +38,20 @@
             routerLinkActive="router-link-active"
             >My Orders</a
           >
-          <a
-            class="dropdown-item"
-            [routerLink]="['/admin/orders']"
-            routerLinkActive="router-link-active"
-            >Manage Orders</a
-          >
-          <a
-            class="dropdown-item"
-            [routerLink]="['/admin/products']"
-            routerLinkActive="router-link-active"
-            >Manage Product</a
-          >
+          <ng-container *ngIf="user.isAdmin">
+            <a
+              class="dropdown-item"
+              [routerLink]="['/admin/orders']"
+              routerLinkActive="router-link-active"
+              >Manage Orders</a
+            >
+            <a
+              class="dropdown-item"
+              [routerLink]="['/admin/products']"
+              routerLinkActive="router-link-active"
+              >Manage Product</a
+            >
+          </ng-container>
           <a class="dropdown-item" (click)="logout()">Log out</a>
         </div>
       </li>
