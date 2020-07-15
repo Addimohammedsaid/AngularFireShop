@@ -15,10 +15,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Shopping Cart</a>
+        <a class="nav-link" [routerLink]="['/']">Shopping Cart</a>
       </li>
-      <ng-template #anonymUser class="nav-item">
-        <a class="nav-link" [routerLink]="['/login']">Login</a>
+      <ng-template #anonymUser>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
       </ng-template>
       <li class="nav-item dropdown" *ngIf="appUser; else anonymUser">
         <a
@@ -38,7 +40,7 @@
             routerLinkActive="router-link-active"
             >My Orders</a
           >
-          <ng-container *ngIf="user.isAdmin">
+          <ng-container *ngIf="appUser.isAdmin">
             <a
               class="dropdown-item"
               [routerLink]="['/admin/orders']"

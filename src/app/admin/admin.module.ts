@@ -18,6 +18,7 @@ import { AdminAuthGuardService } from "./services/admin-auth-guard.service";
       {
         path: "admin/products/:id",
         component: ProductFormComponent,
+        canActivate: [AdminAuthGuardService],
       },
       {
         path: "admin/products",
