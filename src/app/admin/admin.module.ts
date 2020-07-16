@@ -2,6 +2,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "./../shared/shared.module";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
+import { DataTableModule } from "angular5-data-table";
 import { ProductFormComponent } from "./comp/product-form/product-form.component";
 import { AdminProductsComponent } from "./comp/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "./comp/admin-orders/admin-orders.component";
@@ -11,6 +12,7 @@ import { AdminAuthGuardService } from "./services/admin-auth-guard.service";
 @NgModule({
   imports: [
     SharedModule,
+    DataTableModule,
     FormsModule,
     RouterModule.forChild([
       {
