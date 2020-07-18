@@ -1,1 +1,15 @@
-<p>product-card works!</p>
+<div class="card" width="20rem">
+  <img [src]="product.imageUrl" class="card-img-top" />
+  <div class="card-body">
+    <div class="card-title">{{ product.title }}</div>
+    <div class="card-text">
+      <p>{{ product.price | currency: "USD":"symbol" }}</p>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="showActions">
+    <button (click)="addToCart(product)" class="btn btn-primary">
+      Add to cart
+    </button>
+    <div>{{ getQuantity() }}</div>
+  </div>
+</div>

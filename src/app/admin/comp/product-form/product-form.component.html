@@ -84,7 +84,7 @@
       </button>
     </form>
   </div>
-  <div class="col-md-6">
+  <div *ngIf="product[3]" class="col-md-6">
     <div class="card" width="20rem">
       <img [src]="product[1]" alt="" class="card-img-top" *ngIf="product[1]" />
       <div class="card-body">

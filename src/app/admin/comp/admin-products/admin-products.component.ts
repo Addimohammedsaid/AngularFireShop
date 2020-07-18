@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
   products: Product[];
-  filteredProducts: any[];
   subscription: Subscription;
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
@@ -28,7 +27,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe((products) => {
-        this.filteredProducts = this.products = products;
+        this.products = products;
         this.initTable(this.products);
       });
   }
@@ -47,11 +46,13 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   filter(query: string) {
-    this.filteredProducts = query
+    let filteredProducts = query
       ? this.products.filter((p) =>
           p.title.toLowerCase().includes(query.toLowerCase())
         )
       : this.products;
+
+    this.initTable(filteredProducts);
   }
 
   ngOnInit() {}

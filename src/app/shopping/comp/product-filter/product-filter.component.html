@@ -1,1 +1,20 @@
-<p>product-filter works!</p>
+<div class="sticky-top">
+  <ul class="list-group">
+    <a
+      [routerLink]="['/']"
+      class="list-group-item list-group-item-action"
+      [class.active]="!category"
+    >
+      All categories
+    </a>
+    <a
+      *ngFor="let c of categories"
+      [routerLink]="['/']"
+      class="list-group-item list-group-item-action"
+      [queryParams]="{ category: c.key }"
+      [class.active]="category === c.key"
+    >
+      {{ c.name }}
+    </a>
+  </ul>
+</div>
