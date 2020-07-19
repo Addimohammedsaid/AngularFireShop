@@ -31,6 +31,14 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
+    this.updateCarte(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateCarte(product, -1);
+  }
+
+  async updateCarte(product: Product, c: number) {
     let cartId = await this.getOrCreateCarteId();
     let item$ = this.db.object(
       "/shopping-cart/" + cartId + "/items/" + product.key
@@ -42,7 +50,7 @@ export class ShoppingCartService {
         item$.update({
           product: product,
           quantity:
-            (item.payload.exists() ? item.payload.val()["quantity"] : 0) + 1,
+            (item.payload.exists() ? item.payload.val()["quantity"] : 0) + c,
         });
       });
   }

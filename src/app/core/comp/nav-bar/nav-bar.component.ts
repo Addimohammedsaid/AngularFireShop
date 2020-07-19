@@ -1,3 +1,4 @@
+import { ShoppingCartService } from "./../../../shared/services/shopping-cart.service";
 import { AuthService } from "./../../../shared/services/auth.service";
 import { Component, OnInit } from "@angular/core";
 import { AppUser } from "src/app/shared/models/app-user";
@@ -10,7 +11,10 @@ import { AppUser } from "src/app/shared/models/app-user";
 export class NavBarComponent implements OnInit {
   appUser: AppUser;
 
-  constructor(private _auth: AuthService) {}
+  constructor(
+    private _auth: AuthService,
+    private _shoppingCartService: ShoppingCartService
+  ) {}
 
   ngOnInit() {
     this._auth.appUser$.subscribe((appUser) => (this.appUser = appUser));

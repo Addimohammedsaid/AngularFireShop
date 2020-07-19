@@ -12,8 +12,10 @@ export class ProductCardComponent {
   @Input("showActions") showActions = false;
   @Input("shoppingCart") shoppingCart;
 
-  addToCart(product: Product) {
-    this.shoppingCartService.addToCart(product);
+  constructor(private shoppingCartService: ShoppingCartService) {}
+
+  addToCart() {
+    this.shoppingCartService.addToCart(this.product);
   }
 
   getQuantity() {
@@ -22,5 +24,7 @@ export class ProductCardComponent {
     return item ? item.quantity : 0;
   }
 
-  constructor(private shoppingCartService: ShoppingCartService) {}
+  removeFromCart() {
+    this.shoppingCartService.removeFromCart(this.product);
+  }
 }
