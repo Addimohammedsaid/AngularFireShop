@@ -22,11 +22,11 @@ export class ProductFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     categoryService
-      .getCategories()
+      .list
       .snapshotChanges()
       .pipe(
         map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+          changes.map((c) => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
         )
       )
       .subscribe((categories) => {

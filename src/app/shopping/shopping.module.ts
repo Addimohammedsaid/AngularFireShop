@@ -1,10 +1,8 @@
 import { AuthGuardService } from "./../shared/services/auth-guard.service";
-import { ShippingFormComponent } from "./comp/shipping-form/shipping-form.component";
 import { ShippingCartComponent } from "./comp/shipping-cart/shipping-cart.component";
 import { SharedModule } from "./../shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ProductsComponent } from "./comp/products/products.component";
 import { CheckOutComponent } from "./comp/check-out/check-out.component";
@@ -45,8 +43,7 @@ import { ProductFilterComponent } from "./comp/product-filter/product-filter.com
     MyOrdersComponent,
     ProductFilterComponent,
     ShippingCartSummaryComponent,
-    ShippingCartComponent,
-    ShippingFormComponent,
+    ShippingCartComponent,    
   ],
 })
 export class ShoppingModule {}

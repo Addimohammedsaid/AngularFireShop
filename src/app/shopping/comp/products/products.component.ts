@@ -12,6 +12,7 @@ import { map } from "rxjs/internal/operators/map";
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.css"],
 })
+
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
@@ -24,16 +25,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private shoppingCartService: ShoppingCartService
   ) {
-    this.productService
-      .getAll()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+    this.productService.list.snapshotChanges().pipe(map((changes) =>
+          changes.map((c) => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
         )
       )
       .pipe(
         switchMap((products) => {
+          console.log(products);
           this.filteredProducts = this.products = products;
           return route.queryParamMap;
         })
@@ -46,17 +44,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
+  //Called once, before the instance is initialize.
   async ngOnInit() {
-    this.subscription = (await this.shoppingCartService.getCarte()).subscribe(
+    this.subscription = (await this.shoppingCartService.getCart()).subscribe(
       (e) => {
+        console.log(e);
         this.cart = e;
       }
     );
   }
 
+ //Called once, before the instance is destroyed. 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

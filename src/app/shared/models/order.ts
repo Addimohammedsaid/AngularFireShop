@@ -9,7 +9,11 @@ export class Order {
     public shipping: any,
     shoppingCart: ShoppingCart
   ) {
+
+    // get current of created shopping cart
     this.datePlaced = new Date().getTime();
+
+    // mapping items to shoppingCart items
     this.items = shoppingCart.items.map((i) => {
       return {
         product: {

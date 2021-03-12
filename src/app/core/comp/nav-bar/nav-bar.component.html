@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/']">Firebase Shop</a>
+  <a class="navbar-brand" [routerLink]="['/']">FireShop</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -30,7 +30,7 @@
           <a class="nav-link" [routerLink]="['/login']">Login</a>
         </li>
       </ng-template>
-      <li class="nav-item dropdown" *ngIf="appUser; else anonymUser">
+      <li class="nav-item dropdown" *ngIf="user; else anonymUser">
         <a
           class="nav-link dropdown-toggle"
           id="navbarDropdown"
@@ -39,7 +39,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{ appUser.name }}
+          {{ user.name }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a
@@ -48,7 +48,7 @@
             routerLinkActive="router-link-active"
             >My Orders</a
           >
-          <ng-container *ngIf="appUser.isAdmin">
+          <ng-container *ngIf="user.isAdmin">
             <a
               class="dropdown-item"
               [routerLink]="['/admin/orders']"

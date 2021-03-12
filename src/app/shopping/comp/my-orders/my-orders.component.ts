@@ -14,7 +14,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService, private order: OrderService) {}
 
   ngOnInit() {
-    this.auth.user$
+    this.auth.userFire$
       .pipe(take(1))
       .subscribe(
         (item) =>

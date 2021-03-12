@@ -1,8 +1,8 @@
-import { AuthService } from "./shared/services/auth.service";
 import { environment } from "../environments/environment";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AngularFireModule } from "@angular/fire";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { AppComponent } from "./app.component";
 import { SharedModule } from "./shared/shared.module";
 import { AdminModule } from "./admin/admin.module";
@@ -13,22 +13,22 @@ import { ProductsComponent } from "./shopping/comp/products/products.component";
 import { LoginComponent } from "./core/comp/login/login.component";
 import { FormsModule } from "@angular/forms";
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),    
     BrowserModule,
-    SharedModule,
-    FormsModule,
+    SharedModule,  
+    CoreModule,  
     AdminModule,
-    ShoppingModule,
-    CoreModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ShoppingModule,      
     RouterModule.forRoot([
       { path: "", component: ProductsComponent },
       { path: "login", component: LoginComponent },
     ]),
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

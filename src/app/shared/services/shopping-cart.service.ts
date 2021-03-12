@@ -1,72 +1,119 @@
-import { Observable } from "rxjs";
+import { Observable, pipe } from "rxjs";
 import { ShoppingCart } from "./../models/shopping-cart";
 import { Product } from "./../models/product";
-import {
-  AngularFireDatabase,
-  AngularFireList,
-  AngularFireObject,
-} from "@angular/fire/database";
 import { Injectable } from "@angular/core";
-import { take, map } from "rxjs/internal/operators";
+import { take, map, tap } from "rxjs/internal/operators";
+import { AngularFirestore } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class ShoppingCartService {
-  constructor(private db: AngularFireDatabase) {}
 
-  private create() {
-    return this.db.list("/shopping-cart/").push({
-      dateCreated: new Date().getTime(),
-    });
+  url:string = "shopping-cart";
+
+  constructor(private db: AngularFirestore) {}
+
+  //========== GET ==========//
+
+  async getCart(): Promise<Observable<ShoppingCart>> {    
+    // get cart id
+    let carteId:string = await this.getCartId();    
+
+    // return data from cart
+    let items = this.db.collection(this.url).doc(carteId).collection('items').snapshotChanges();
+    
+    return items.pipe(map((items) => {
+      let itemsmodif:any = [];
+      items.map((c)=> {
+        itemsmodif[c.payload.doc.id] =  { ...c.payload.doc.data()};
+      });      
+      return (new ShoppingCart(itemsmodif))
+    }));            
   }
 
-  async getCarte(): Promise<Observable<ShoppingCart>> {
-    let carteId = await this.getOrCreateCarteId();
-    return this.db
-      .object("/shopping-cart/" + carteId)
-      .valueChanges()
-      .pipe(map((e) => new ShoppingCart(e["items"])));
-  }
+  // get or create carte from local storage
+  private async getCartId(): Promise<string> {    
 
-  private async getOrCreateCarteId(): Promise<String> {
+    // get cart id from local storage
     let cartId = localStorage.getItem("cartId");
     if (cartId) return cartId;
 
-    let result = await this.create();
-    localStorage.setItem("cartId", result.key);
-    return result.key;
+    // else create cart id
+    let key = await this.create();
+    localStorage.setItem("cartId", key);
+
+    return key;
   }
 
+  //========== POST ==========//
+
+  private create() {
+    // generate key
+    const key = this.db.createId();        
+
+    // get collection from db
+    this.db.collection(this.url).doc(key).set({
+      dateCreated: new Date().getTime(),
+    });    
+
+    // return the doc key
+    return key;
+  }
+
+  //========== UPDATE ==========//
+
   async addToCart(product: Product) {
+    // increase cart by 1 & add product to cart
     this.updateCarte(product, 1);
   }
 
+  async updateCarte(product: Product, c: number) {    
+    // get Cart id
+    let cartId:string = await this.getCartId();    
+
+    // ref to add product
+    let item$ = this.db.collection(this.url).doc(cartId).collection('items').doc(product.key);
+    
+    // update to product quantity
+    item$.snapshotChanges().pipe(take(1))
+      .subscribe((item) => {        
+
+        if(item.payload.exists)
+          item$.update({                 
+            quantity: item.payload.data()["quantity"] + c,
+        })
+
+        else item$.set({  
+          product : product,        
+          quantity: 0 + c,
+        })
+
+      });
+  }
+
+  //========== DELETE ==========//
+
+  // remove -1 quantity product from cart
   async removeFromCart(product: Product) {
     this.updateCarte(product, -1);
   }
 
-  async updateCarte(product: Product, c: number) {
-    let cartId = await this.getOrCreateCarteId();
-    let item$ = this.db.object(
-      "/shopping-cart/" + cartId + "/items/" + product.key
-    );
-    item$
-      .snapshotChanges()
-      .pipe(take(1))
-      .subscribe((item) => {
-        item$.update({
-          product: product,
-          quantity:
-            (item.payload.exists() ? item.payload.val()["quantity"] : 0) + c,
-        });
-      });
-  }
+  //========== UTILS ==========//
 
   async clearCart() {
-    console.log("remove");
-    let cartId = await this.getOrCreateCarteId();
-    console.log(cartId);
-    this.db.object("/shopping-cart/" + cartId + "/items/").remove();
+    // get Cart id
+    let cartId = await this.getCartId();    
+
+    // clear all cart    
+    this.db.collection(this.url).doc(cartId).collection('items')
+    .get()
+    .toPromise()
+    .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      doc.ref.delete();
+    })});
+
   }
+
 }

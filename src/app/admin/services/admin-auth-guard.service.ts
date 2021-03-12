@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { AppUser } from "./../../shared/models/app-user";
+import { UserModel } from "../../shared/models/user";
 import { AuthService } from "./../../shared/services/auth.service";
 import { RouterStateSnapshot } from "@angular/router";
 import { Injectable } from "@angular/core";
@@ -9,14 +9,13 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AdminAuthGuardService {
-  appUser: AppUser;
+  appUser: UserModel;
 
   constructor(private _auth: AuthService) {}
 
   canActivate(): Observable<boolean> {
-    return this._auth.appUser$.pipe(
-      map((appUser) => {
-        console.log(appUser.isAdmin);
+    return this._auth.user$.pipe(
+      map((appUser) => {        
         return appUser.isAdmin;
       })
     );

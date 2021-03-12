@@ -1,30 +1,38 @@
 import { ShoppingCartService } from "src/app/shared/services/shopping-cart.service";
-import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { Injectable } from "@angular/core";
-import { Order } from "../models/order";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class OrderService {
+
+  url : string = "orders";
+
   constructor(
-    private db: AngularFireDatabase,
+    private db: AngularFirestore,
     private shoppingCartService: ShoppingCartService
   ) {}
 
   async placeOrder(order) {
-    let result = await this.db.list("/orders").push(order);
-    this.shoppingCartService.clearCart();
-    return result;
+    // generate key
+    const key = this.db.createId();   
+
+    await this.db.collection(this.url).doc(key).set(Object.assign({}, order));
+    
+    // clear cart after order    
+    await this.shoppingCartService.clearCart();
+
+    return key;
   }
 
   getOrders() {
-    return this.db.list("/orders");
+    return this.db.collection(this.url);
   }
 
-  getOrdersByUser(userId: string): AngularFireList<any> {
-    return this.db.list("/orders/", (ref) => {
-      let q = ref.orderByChild("userId").equalTo(userId);
+  getOrdersByUser(userId: string): AngularFirestoreCollection<any> {
+    return this.db.collection(this.url , (ref) => {
+      let q = ref.where("userId","==", userId);
       return q;
     });
   }

@@ -1,16 +1,20 @@
-import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { Injectable } from "@angular/core";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class CategoryService {
-  constructor(private db: AngularFireDatabase) {}
 
-  getCategories(): AngularFireList<any> {
-    return this.db.list("/categories/", (ref) => {
-      let q = ref.orderByChild("name");
-      return q;
+  url:string = "categories";
+
+  constructor(private db: AngularFirestore) {}
+
+  // GET
+  get list(): AngularFirestoreCollection<any> {    
+    return this.db.collection(this.url, (ref)=> {
+      return ref.orderBy("name");
     });
   }
+
 }

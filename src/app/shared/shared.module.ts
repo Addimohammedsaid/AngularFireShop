@@ -14,7 +14,6 @@ import { DataTableModule } from "angular5-data-table";
     CommonModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    //NgModule.forRoot(),
   ],
   declarations: [ProductCardComponent, ProductQunatityComponent],
   exports: [
@@ -23,7 +22,6 @@ import { DataTableModule } from "angular5-data-table";
     CommonModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    //NgbModule.forRoot().ngModule,
   ],
   providers: [],
 })

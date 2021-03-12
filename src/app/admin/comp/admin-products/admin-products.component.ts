@@ -19,11 +19,11 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService) {
     this.subscription = productService
-      .getAll()
+      .list
       .snapshotChanges()
       .pipe(
         map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+          changes.map((c) => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
         )
       )
       .subscribe((products) => {

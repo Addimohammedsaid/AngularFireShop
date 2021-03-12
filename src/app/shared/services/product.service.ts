@@ -1,29 +1,32 @@
-import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { Injectable } from "@angular/core";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService {
-  constructor(private db: AngularFireDatabase) {}
 
-  create(product) {
-    this.db.list("/products").push(product);
+  url:string = "products";
+
+  constructor(private db: AngularFirestore) {}
+
+  create(product) {    
+    return this.db.collection(this.url).add(product);
   }
 
-  getAll(): AngularFireList<any> {
-    return this.db.list("/products");
+  get list(): AngularFirestoreCollection<any> {
+    return this.db.collection(this.url);
   }
 
-  getProduct(productId) {
-    return this.db.list("/products/" + productId);
+  getProduct(key) {
+    return this.db.collection(this.url).doc(key);
   }
 
-  update(product, productId) {
-    return this.db.object("/products/" + productId).update(product);
+  update(product, key) {
+    return this.db.collection(this.url).doc(key).update(product);
   }
 
-  delete(productId) {
-    this.db.object("/products/" + productId).remove();
+  delete(key) {
+    return this.db.collection(this.url).doc(key).delete();
   }
 }

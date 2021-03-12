@@ -75,7 +75,7 @@
       </button>
     </form>
   </div>
-  <div class="col-6">
-    <app-shipping-cart-summary [cart]="cart$"></app-shipping-cart-summary>
+  <div class="col-6" *ngIf="cart">
+    <app-shipping-cart-summary [cart]="cart"></app-shipping-cart-summary>
   </div>
 </div>

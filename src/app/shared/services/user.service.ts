@@ -1,23 +1,27 @@
-import { AppUser } from "./../models/app-user";
+import { UserModel } from "../models/user";
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFireList } from "@angular/fire/database";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService {
-  constructor(private db: AngularFireDatabase) {}
 
-  save(user: firebase.User) {
-    console.log("save");
-    this.db.object("/users/" + user.uid).update({
+  url : string = "users";
+
+  constructor(private db: AngularFirestore) {}
+
+  saveUser(user: firebase.User) {    
+    // add or update firebase user into database  
+    this.db.collection(this.url).doc(user.uid).set({
       name: user.displayName,
       email: user.email,
-      isAdmin: true,
-    });
+      isAdmin: false,
+    }, {merge: true});
   }
 
-  get(uid: string): AngularFireObject<AppUser> {
-    return this.db.object("/users/" + uid);
+  getUser(uid: string): AngularFirestoreDocument<UserModel> {
+    return this.db.collection(this.url).doc(uid);
   }
 }
