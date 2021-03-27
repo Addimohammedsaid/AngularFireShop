@@ -1,25 +1,16 @@
-<h1>Orders</h1>
+<h1>Order</h1>
 <table class="table">
   <thead>
     <tr>
       <th>Customer</th>
       <th>Date</th>
-      <th>Status</th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders">
+    <tr>       
       <td>{{ order.shipping.name }}</td>
       <td>{{ order.datePlaced | date }}</td>
-      <td>Delivered</td>
-      <td>
-        <a href="#">View</a>
-      </td>
-      <td>
-        <a (click)="deleteOrder(order.key)">Delete</a>
-      </td>
     </tr>
   </tbody>
 </table>

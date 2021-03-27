@@ -1,4 +1,4 @@
-import { switchMap, map } from "rxjs/operators";
+import {  map } from "rxjs/operators";
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { Router, CanActivate, RouterStateSnapshot } from "@angular/router";

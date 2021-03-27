@@ -55,6 +55,11 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.initTable(filteredProducts);
   }
 
+  deleteProduct(key){
+    if (!confirm("are you sure you want to delete it ?")) return null;
+    this.productService.delete(key);    
+  }
+
   ngOnInit() {}
 
   ngOnDestroy() {

@@ -1,17 +1,27 @@
 import { Component, OnInit } from "@angular/core";
+import { map } from "rxjs/operators";
+import { Order } from "src/app/shared/models/order";
 import { OrderService } from "src/app/shared/services/order.service";
 
 @Component({
-  selector: "app-admin-orders",
+  selector: "admin-orders",
   templateUrl: "./admin-orders.component.html",
   styleUrls: ["./admin-orders.component.css"],
 })
 export class AdminOrdersComponent implements OnInit {
-  orders$;
+  orders : Order[];
 
-  constructor(private order: OrderService) {}
+  constructor(private orderService: OrderService) {}
 
   ngOnInit() {
-    this.orders$ = this.order.getOrders().valueChanges();
+    this.orderService.getOrders().snapshotChanges().pipe(map((changes) =>
+    changes.map((c:any) => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
+  )
+).subscribe((orders) => { this.orders = orders; });
+
+  }
+
+  deleteOrder(key){
+    this.orderService.deleteOrder(key);
   }
 }

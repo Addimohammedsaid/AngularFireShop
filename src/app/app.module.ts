@@ -9,7 +9,6 @@ import { AdminModule } from "./admin/admin.module";
 import { ShoppingModule } from "./shopping/shopping.module";
 import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { ProductModule } from "./product/product.model";
 
 
 @NgModule({

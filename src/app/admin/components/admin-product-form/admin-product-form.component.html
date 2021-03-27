@@ -5,7 +5,7 @@
         <label for="title">Title</label>
         <input
           #title="ngModel"
-          [(ngModel)]="product[3]"
+          [(ngModel)]="product.title"
           name="title"
           id="title"
           type="text"
@@ -21,7 +21,7 @@
         <div class="input-group">
           <span class="input-group-addon">$</span>
           <input
-            [(ngModel)]="product[2]"
+            [(ngModel)]="product.price"
             #price="ngModel"
             name="price"
             id="price"
@@ -39,7 +39,7 @@
       <div class="form-group">
         <label for="category">Category</label>
         <select
-          [(ngModel)]="product[0]"
+          [(ngModel)]="product.category"
           #category="ngModel"
           name="category"
           id="category"
@@ -61,7 +61,7 @@
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
         <input
-          [(ngModel)]="product[1]"
+          [(ngModel)]="product.imageUrl"
           #imageUrl="ngModel"
           name="imageUrl"
           id="imageUrl"
@@ -84,13 +84,13 @@
       </button>
     </form>
   </div>
-  <div *ngIf="product[3]" class="col-md-6">
+  <div *ngIf="product.title" class="col-md-6">
     <div class="card" width="20rem">
-      <img [src]="product[1]" alt="" class="card-img-top" *ngIf="product[1]" />
+      <img [src]="product.imageUrl" alt="" class="card-img-top" *ngIf="product.imageUrl" />
       <div class="card-body">
-        <div class="card-title">{{ product[3] }}</div>
+        <div class="card-title">{{ product.title }}</div>
         <div class="card-text">
-          <p>{{ product[2] | currency: "USD":true }}</p>
+          <p>{{ product.price | currency: "USD":true }}</p>
         </div>
       </div>
     </div>

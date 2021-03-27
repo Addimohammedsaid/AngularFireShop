@@ -44,7 +44,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a
             class="dropdown-item"
-            [routerLink]="['/shopping/my/orders']"
+            [routerLink]="['/order']"
             routerLinkActive="router-link-active"
             >My Orders</a
           >
@@ -61,12 +61,6 @@
               routerLinkActive="router-link-active"
               >Manage Product</a
             >
-            <a
-              class="dropdown-item"
-              [routerLink]="['/admin/add/product']"
-              routerLinkActive="router-link-active"
-              >Add Product
-            </a>
           </ng-container>
           <a class="dropdown-item" (click)="logout()">Log out</a>
         </div>

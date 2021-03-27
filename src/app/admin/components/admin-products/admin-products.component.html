@@ -42,4 +42,9 @@
       <a [routerLink]="['/admin/products/', item.key]">Edit</a>
     </ng-template>
   </data-table-column>
+  <data-table-column [property]="'$key'">
+    <ng-template #dataTableCell let-item="item">
+      <a (click)="deleteProduct(item.key)">Delete</a>
+    </ng-template>
+  </data-table-column>
 </data-table>

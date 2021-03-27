@@ -14,31 +14,31 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private userService: UserService,
-    private router: Router,
-  ){}
+    private router: Router
+  ) {}
 
-  ngOnInit(){    
-
+  ngOnInit() {
     // on auth change
-    this.auth.userFire$.subscribe((user) => {      
-      // if user exist return null
-      if (!user) return;
+    this.auth.userFire$.subscribe(
+      (user) => {
+        // if user exist return null
+        if (!user) return;
 
-      // else update user
-      this.userService.saveUser(user);
+        // else update user
+        this.userService.saveUser(user);
 
-      // return to saved route
-      let returnUrl = localStorage.getItem("returnUrl");
-      if (!returnUrl) return;
+        // return to saved route
+        let returnUrl = localStorage.getItem("returnUrl");
+        if (!returnUrl) return;
 
-      localStorage.removeItem("returnUrl");
-      this.router.navigateByUrl(returnUrl);
-      
-    }, (error) => {
-      console.log('error')       
-    });
-  }  
+        localStorage.removeItem("returnUrl");
+        this.router.navigateByUrl(returnUrl);
+      },
+      (error) => {
+        console.log("error");
+      }
+    );
+  }
 
-
-  ngOnDestroy(){}
+  ngOnDestroy() {}
 }

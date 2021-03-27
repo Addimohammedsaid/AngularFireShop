@@ -6,11 +6,11 @@ import { map, take, switchMap } from "rxjs/operators";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: "app-product-form",
-  templateUrl: "./product-form.component.html",
-  styleUrls: ["./product-form.component.css"],
+  selector: "app-admin-product-form",
+  templateUrl: "./admin-product-form.component.html",
+  styleUrls: ["./admin-product-form.component.css"],
 })
-export class ProductFormComponent implements OnInit {
+export class AdminProductFormComponent implements OnInit {
   categories: any;
   product: any = [];
   id: any;
@@ -21,7 +21,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    categoryService
+    this.categoryService
       .list
       .snapshotChanges()
       .pipe(
@@ -33,14 +33,16 @@ export class ProductFormComponent implements OnInit {
         this.categories = categories;
       });
 
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = this.route.snapshot.paramMap.get("id");   
+
     if (this.id)
       this.productService
         .getProduct(this.id)
-        .valueChanges()
+        .snapshotChanges()
         .pipe(take(1))
         .subscribe((res) => {
-          this.product = res;
+          this.product = res.payload.data();
+          console.log(this.product);
         });
   }
 
@@ -49,7 +51,6 @@ export class ProductFormComponent implements OnInit {
   save(product) {
     if (this.id) this.productService.update(product, this.id);
     else this.productService.create(product);
-
     this.router.navigate(["/admin/products/"]);
   }
 

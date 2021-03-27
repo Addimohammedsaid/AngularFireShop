@@ -1,6 +1,4 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ProductFormComponent } from "./components/product-form/product-form.component";
 import { SharedModule } from "../shared/shared.module";
 import { ProductCardComponent } from "./components/product-card/product-card.component";
 import { ProductFilterComponent } from "./components/product-filter/product-filter.component";
@@ -15,14 +13,12 @@ import { ProductRoutingModule } from "./product-routing.model";
   [
     ProductsComponent,
     ProductFilterComponent,
-    ProductCardComponent,
-    ProductFormComponent,
+    ProductCardComponent,   
     ProductQuantityComponent,
   ],
   exports: [    
     ProductFilterComponent,
-    ProductCardComponent,
-    ProductFormComponent,
+    ProductCardComponent,  
     ProductQuantityComponent,
   ],
 })
