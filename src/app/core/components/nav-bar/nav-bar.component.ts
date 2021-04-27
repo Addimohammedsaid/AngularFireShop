@@ -7,7 +7,7 @@ import { ShoppingCart } from "src/app/shared/models/shopping-cart";
 
 
 @Component({
-  selector: "app-nav-bar",
+  selector: "nav-bar",
   templateUrl: "./nav-bar.component.html",
   styleUrls: ["./nav-bar.component.css"],
 })

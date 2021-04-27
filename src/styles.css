@@ -1,10 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-a{
-    color:#0074D9 !important;
-    cursor: pointer;
+root {
+    --primary-color: #444444;
+    --accent-color: #fcb62e;
+    --main-bg-color: #f4f4f4;
+    --secondary-color: #e44749;
+    --border-color: #858585;
+  }
+  /* Generale */
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  *:focus {
+    outline: none;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  img {
+    width: 100%;
+  }
+  
+  a {
+    font-size: 1rem;
+    color:#0074D9;    
+    cursor: pointer;         
+  }
+  
+  section {
+    background-color: var(--main-bg-color);
+  }
+  
+  textarea {
+    padding: 40px;
+  }
+
+li {
+    list-style: none;
+}
+
+
+body {
+    font-family: 'Sora', sans-serif;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
+h3 {
+    font-size: 4rem;
+}
+
+h4 {
+    font-size: 4rem;
+}
+
+h5 {
+    font-size: 4rem;
+}
+
+
+.show-mobile {
+    display: block;
+  }
+  
+  .hide-mobile {
+    display: none;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .hide-desktop {
+      display: none;
+    }
+  
+    .show-desktop {
+      display: block;
+    }
 }
