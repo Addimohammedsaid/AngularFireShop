@@ -18,7 +18,7 @@
   </div>
 </div> -->
 
-<section id="hero-section">
+<section id="hero-section"> 
   <div class="hero-header">
     <h1 class="hero-title">
       An exciting place <br />
@@ -28,12 +28,32 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vitae
       provident quasi qui deleniti, tenetur.
     </p>
-    <a class="btn btn-primary anim-ripple">Shop</a>
+    <a class="btn btn-primary anim-ripple" href="#popular-products">Shop</a>
   </div>
   <div class="hero-thumbnail hide-mobile show-desktop">
     <img
       src="https://www.mynxg.com/images/homepage/header.png"
       alt="electronic device image"
     />
+  </div>
+</section>
+
+
+<section id="popular-products">
+  <div class="section-title">
+    <span>New Products</span>
+    <h2>Popular Products</h2>
+  </div>
+  <div class="categories">
+    <app-product-filter [category]="category"></app-product-filter>
+  </div>
+  <div class="product-list">    
+      <ng-container *ngFor="let product of filteredProducts; let i = index">       
+          <app-product-card
+            [product]="product"
+            [showActions]="true"
+            [shoppingCart]="cart"
+          ></app-product-card>               
+      </ng-container>    
   </div>
 </section>

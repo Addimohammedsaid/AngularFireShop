@@ -1,5 +1,5 @@
 <div class="card">
-  <img [src]="product.imageUrl" class="card-img-top" />
+  <img class="card-thumbnail" [src]="product.imageUrl" />
   <div class="card-body">
     <div class="card-title">{{ product.title }}</div>
     <div class="card-text">
@@ -10,27 +10,26 @@
     <button
       *ngIf="getQuantity() === 0; else updateQuantity"
       (click)="addToCart()"
-      class="btn btn-secondary btn-block"
+      style="width:100%"      
+      class="btn btn-secondary"
     >
       Add to cart
     </button>
-    <ng-template #updateQuantity>
-      <div class="row no-gutters">
-        <div class="col-2">
+    <ng-template #updateQuantity>  
+      <div style="display: flex; flex-direction:row; justify-content:space-between; align-items:center;align-self: center;">
           <button
             class="btn btn-secondary btn-block"
             (click)="removeFromCart()"
           >
             -
-          </button>
-        </div>
-        <div class="col text-center">{{ getQuantity() }} in cart</div>
-        <div class="col-2">
+          </button>        
+            <div class="col text-center">{{ getQuantity() }} in cart</div>
           <button class="btn btn-secondary btn-block" (click)="addToCart()">
             +
-          </button>
-        </div>
-      </div>
+          </button>              
+        </div>    
     </ng-template>
   </div>
 </div>
+
+

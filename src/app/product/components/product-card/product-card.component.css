@@ -1,9 +1,34 @@
 .card {
-    height:300px;
+    height: 400px;    
+    border:  1px solid #e8e8e8;
+    cursor: pointer;   
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;    
+  }
+  
+  .card .card-thumbnail {
+    height: 65%;
+    overflow: hidden;
+    object-fit: cover;    
+  }
+  
+.card-body {
+    padding: 10px;
+    text-align: left;
+    color: #333;
 }
 
-.card-img-top {
-    width:100%;
-    height:100%;
-    object-fit: cover;
-}
+  .card .card-title {    
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+    
+  .element {
+    pointer-events: none;
+  }
+  
+  
+  

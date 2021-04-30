@@ -5,6 +5,7 @@ import { SharedModule } from "../shared/shared.module";
 import { LoginComponent } from "./components/login/login.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HeroComponent } from './components/hero/hero.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([])],
@@ -13,6 +14,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     LoginComponent,
     FooterComponent,
     PageNotFoundComponent,
+    HeroComponent,
   ],
   exports: [NavBarComponent, FooterComponent],
 })

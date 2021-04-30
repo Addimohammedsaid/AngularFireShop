@@ -80,8 +80,7 @@ nav ul {
 }
 
 .toggler {
-  position: absolute;
-  background-color: aqua;
+  position: absolute;  
   left: 40px;
   top: 10px;
   transform: translate(20px, -20px);
@@ -167,7 +166,7 @@ nav ul {
 
   nav li:after {
     content: "";
-    background-color: dimgray;
+    background-color: #0074d9;
     width: 0%;
     height: 0.8px;
     position: absolute;
@@ -177,8 +176,8 @@ nav ul {
     transition: all 0.24s linear;
   }
 
-  nav li:hover {
-    opacity: 0.9;
+  nav li:hover a{
+    color : #0074d9 !important;
   }
 
   nav li:hover:after {

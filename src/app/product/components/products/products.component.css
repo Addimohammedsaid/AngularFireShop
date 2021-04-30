@@ -1,10 +1,11 @@
 #hero-section {
+  min-height: 90vh;
   padding: 40px;
-  display: flex;
-  flex-direction: column;
 }
 
 .hero-header {
+  max-width:600px;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -12,7 +13,9 @@
 }
 
 .hero-thumbnail {
-  flex: 2;
+  margin: auto;
+  margin-right: 0;  
+  width : 80%; 
 }
 
 .hero-header .hero-title {
@@ -44,6 +47,39 @@
   width: 100%;
 }
 
+/* ============= POPULAR PRODUCTS ================= */
+#popular-products {    
+  min-height: 100vh;  
+}
+
+.section-title{    
+  line-height:50px;
+  text-align: left;
+}
+
+.section-title span{
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #0074d9;
+  font-size: 0.75rem;
+  font-weight:bold;
+}
+
+.categories {      
+  margin:  60px auto;
+  max-width: 800px; 
+}
+
+.product-list {  
+  margin-top : 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;  
+}
+
+
+
+/* ============= RESPONSIVE ================= */
 @media screen and (min-width: 658px) {
   .hero-header .hero-body {
     width: 100% !important;
@@ -51,11 +87,16 @@
 }
 
 @media screen and (min-width: 768px) {
-  #hero-section {
+  .wrapper {
     flex-direction: row;
   }
 
   .hero-header .hero-body {
     width: clamp(45ch, 50%, 75ch);
+  }
+
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 50px;
   }
 }
