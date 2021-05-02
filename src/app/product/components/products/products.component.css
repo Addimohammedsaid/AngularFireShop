@@ -49,6 +49,7 @@
 
 /* ============= POPULAR PRODUCTS ================= */
 #popular-products {    
+  padding : 40px;
   min-height: 100vh;  
 }
 

@@ -1,7 +1,7 @@
   <ul class="list-group">
     <a
       [routerLink]="['/']"
-      class="list-group-item list-group-item-action"
+      class="list-group-item "
       [class.active]="!category"
     >
       All categories
@@ -9,7 +9,7 @@
     <a
       *ngFor="let c of categories"
       [routerLink]="['/']"
-      class="list-group-item list-group-item-action"
+      class="list-group-item "
       [queryParams]="{ category: c.key }"
       [class.active]="category === c.key"
     >

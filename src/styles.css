@@ -8,7 +8,7 @@
 
 root {
   --primary-color: #444444;
-  --accent-color: #0074d9;;
+  --accent-color: #0074d9;
   --main-bg-color: #f4f4f4;
   --secondary-color: #e44749;
   --border-color: #858585;
@@ -92,6 +92,8 @@ h5 {
 }
 
 .btn-secondary {  
+  color : white;  
+  background-color: 	hsl(208, 100%, 50%);
 }
 
 .py-20 {

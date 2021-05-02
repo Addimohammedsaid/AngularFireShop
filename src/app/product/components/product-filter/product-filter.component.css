@@ -1,7 +1,20 @@
 .list-group{
   display:flex; 
   flex-direction: row;
-  justify-content:space-around;  
+  justify-content:space-evenly;  
+}
+
+
+.list-group-item { 
+  padding:15px 15px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+}
+
+.active{
+  color:#0074d9;
+  background-color: transparent;
+  border : 1px solid #0074d9; 
 }
 
 a  {
