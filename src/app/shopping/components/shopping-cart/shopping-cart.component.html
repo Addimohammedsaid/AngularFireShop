@@ -1,60 +1,62 @@
 <h1>Shopping Cart</h1>
-<div class="cart" *ngIf="cart$ | async as cart">
-  <p class='cart-count'>
-    You have {{ cart.totalItemsCount }} items in your shopping cart.  
-  </p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th  style="width: 330px;">Product</th>
-        <th  style="width: 330px;">Quantity</th>
-        <th  style="width: 300px;">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of cart.items">
-        <td>
-          <div
-            [style.backgroundImage]="'url(' + item.imageUrl + ')'"
-            class="thumbnail"
-          ></div>
-        </td>
-        <td>
-          {{ item.title }}
-        </td>
-        <td>
-          <app-product-quantity [product]="item" [shopping-cart]="cart">
-          </app-product-quantity>
-        </td>
-        <td >
-          {{ item.totalPrice | currency: "USD":"symbol" }}
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th >
-          {{ cart.totalPrice | currency: "USD":"symbol" }}
-        </th>
-      </tr>
-    </tfoot>
-  </table>
-
-  <div class="checkout-card">    
-    <a        
-    class="btn btn-primary"
-    [routerLink]="['/shopping/check-out']"
-    *ngIf="cart.items.length"
-    >Check out</a
-  >
-    <button (click)="clearCart()" class="btn">
-      Clear Shopping Cart
-    </button>    
+<div class="cart">
+  <ng-template #loading class="loading"></ng-template>
+  <div class="table-cart" *ngIf="cart$ | async as cart; else loading">
+    <p class="cart-count">
+      You have {{ cart.totalItemsCount }} items in your shopping cart.
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th style="width: 330px">Product</th>
+          <th style="width: 330px">Quantity</th>
+          <th style="width: 300px">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <td>
+            <div
+              [style.backgroundImage]="'url(' + item.imageUrl + ')'"
+              class="thumbnail"
+            ></div>
+          </td>
+          <td>
+            {{ item.title }}
+          </td>
+          <td>
+            <app-product-quantity [product]="item" [shopping-cart]="cart">
+            </app-product-quantity>
+          </td>
+          <td>
+            {{ item.totalPrice | currency: "USD":"symbol" }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            {{ cart.totalPrice | currency: "USD":"symbol" }}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
-
-  
+  <div class="cart-summary">
+    <h4>order summary</h4>
+    <hr />
+    <p>items</p>
+    <p>shipping</p>
+    <select class="form-control">
+      <option>standard delivery - 4 DZD</option>
+    </select>
+    <hr />
+    <p>total cost</p>
+    <a class="btn btn-gray" [routerLink]="['/shopping/check-out']">Check out</a>
+    <button (click)="clearCart()" class="btn">Clear Shopping Cart</button>
+  </div>
 </div>

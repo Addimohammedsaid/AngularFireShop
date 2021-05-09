@@ -64,15 +64,15 @@ h2 {
 }
 
 h3 {
-  font-size: 4rem;
+  font-size: 1.5rem;
 }
 
 h4 {
-  font-size: 4rem;
+  font-size: 1.2rem;
 }
 
 h5 {
-  font-size: 4rem;
+  font-size: 1rem;
 }
 
 .btn {
@@ -94,6 +94,12 @@ h5 {
 .btn-secondary {  
   color : white;  
   background-color: 	hsl(208, 100%, 50%);
+}
+
+
+.btn-gray {
+  color: white;
+  background-color: #444;
 }
 
 .py-20 {
