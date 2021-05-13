@@ -22,4 +22,5 @@ import { ProductRoutingModule } from "./product-routing.model";
     ProductQuantityComponent,
   ],
 })
+
 export class ProductModule {}

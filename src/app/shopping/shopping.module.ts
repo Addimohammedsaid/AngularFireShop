@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { CheckOutComponent } from "./components/check-out/check-out.component";
 import { ShoppingCartSummaryComponent } from "./components/shipping-cart-summary/shipping-cart-summary.component";
 import { ShoppingRoutingModule } from "./shopping-routing.model";
-import { ProductModule } from "../product/product.model";
+import { ProductModule } from "../product/product.module";
 
 @NgModule({
   imports: [SharedModule, ShoppingRoutingModule, ProductModule],

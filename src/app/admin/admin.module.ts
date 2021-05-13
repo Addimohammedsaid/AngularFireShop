@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { AdminProductsComponent } from "./components/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "./components/admin-orders/admin-orders.component";
 import { AdminRoutingModule } from "./admin-routing.module";
-import { ProductModule } from "../product/product.model";
+import { ProductModule } from "../product/product.module";
 import { AdminProductFormComponent } from "./components/admin-product-form/admin-product-form.component";
 
 

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./core/components/login/login.component";
 import { PageNotFoundComponent } from "./core/components/page-not-found/page-not-found.component";
+import { ProductModule } from "./product/product.module";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "products" },
@@ -9,7 +10,7 @@ const routes: Routes = [
   {
     path: "products",
     loadChildren: () =>
-      import("./product/product.model").then((m) => m.ProductModule),
+      import("./product/product.module").then((m) => m.ProductModule),
   },
   {
     path: "order",
@@ -33,4 +34,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
+
 export class AppRoutingModule {}
